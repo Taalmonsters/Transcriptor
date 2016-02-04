@@ -1,0 +1,5 @@
+% Enter a description of the application to this file.
+% You can comment out lines by preceding them with a percent sign.
+% HTML tags are allowed.
+<h1>About this application</h1>
+<p>Add application description to file &quot;config/about.txt&quot;.</p>

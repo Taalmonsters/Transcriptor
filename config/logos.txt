@@ -1,0 +1,7 @@
+img/logos/Radboud.logo.a4-pms-nl.jpg;http://www.ru.nl/;Radboud
+img/logos/Logo_onze_taal.jpg;http://onzetaal.nl/;Onze Taal
+img/logos/Taalunie.logo_rgb_middel_1.jpg;http://taalunie.org/;Taalunie
+img/logos/ANP.logo.png;http://www.anp.nl/;ANP
+img/logos/NOS.logo.jpg;http://nos.nl/;NOS
+img/logos/VRT.logo.gif;http://www.vrt.be/en;VRT
+img/logos/TilburgUniversity2.png;https://www.tilburguniversity.edu/research/institutes-and-research-groups/ticc/;TiCC/Tilburg

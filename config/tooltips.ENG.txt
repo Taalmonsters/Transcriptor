@@ -1,0 +1,20 @@
+nederlands;Recommended transcription in Dutch general public texts.
+engels;Common transcription(s) in general public texts in English.
+duits;Common transcription in general public texts in German.
+wetenschappelijk1;Transcription commonly in use among Slavists and in specialised scientific publications.
+wetenschappelijk2;Transcription used in the catalogues of the KB (Koninklijke Bibliotheek, i.e. the Dutch National Library) <br/><br/>Click on the link provided to query the catalogues of the KB for this particular transliteration.
+ALA-LC;Transliteration according to the ALA-LC system of the American Library Association and the North-American Library of Congress.<br/><br/>Transcription commonly in use among Slavists and in specialised scientific publications in English. <br/><br/>Click on the link provided to query the catalogues of the Library of Congress for this particular transliteration.
+ALA-LC-simpel;Transliteration  according to a simplified version of the ALA-LC system which omits the diacritics. <br/><br/>Omission of the diacritics makes transliterations easier to read, but ambiguous at times.
+GOST-1983;Transcription recommended by the United Nations for geographical names.
+taalunie;Transcription recommended by the Nederlandse Taalunie (Dutch Language Union) for geographical names.
+BGN-PCGN;Recommended transcription for American and British official use for geographical names.
+GOST-2004;Recommended transcription for road signs in Russia.<br/><br/>In practice this recommendation is not always followed.
+british-standard-ALA-LC;Transcription in use in the British Library catalogues.<br/><br/>In 1975 the British Library adapted it system. At times the two transcriptions may actually be in use. <br/><br/>Click on the link provided to query the catalogues of the British Library for this particular transliteration.
+ICAO;Standard transcription of person names in International Russian passports since 2013.<br/><br/>On request, a divergent transcription from an earlier passport or official document may be used. In practice this causes a lot of variation.
+GOST_R_52535.1-2006;Standard transcription of person names in International Russian passports between 2010 and 2013. <br/><br/>On request, a divergent transcription from an earlier passport or official document may be used. In practice this causes a lot of variation.
+paspoort-1997-2010;Standard transcription of person names in International Russian passports between 1997 and 2010. <br/><br/>On request, a divergent transcription from an earlier passport or official document may be used. In practice this causes a lot of variation.
+paspoort-ussr;Transcription of person names in passports in the Soviet Union and Russia up to 1997. This transcription system was based on French and shows many, often undocumented exceptions. The transcriptions provided here may therefore diverge from the ones found in practice.
+rijbewijs;Transcription of person names in Russian driver's licenses since 2000.<br/><br/>On request, a divergent transcription from one's passport may be used.  In practice this causes variation.
+ISO9-1995;Transliteration  according to ISO norm 9:1995 for international data exchange, primarily by electronic channels. Very strict, always reversible transliteration.<br/><br/>This transliteration was adopted in Russia and a few other former Soviet states as system A from norm GOST 7.79-2000, system A.
+GOST-2000a;Transliteration  according to ISO norm 9:1995 for international data exchange, primarily by electronic channels. Very strict, always reversible transliteration.<br/><br/>This transliteration was adopted in Russia and a few other former Soviet states as system A from norm GOST 7.79-2000, system A.
+GOST-2000b;Transliteration  according to system B from norm GOST 7.79-2000, in vogue in Russia and a few other former Soviet states for data exchange, primarily by electronic channels.

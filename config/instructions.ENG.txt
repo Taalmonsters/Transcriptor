@@ -1,0 +1,4 @@
+name;Enter name
+type;Entity type
+interlang;(Presumed) language of origin of the name
+destlang;Language for which you wish to obtain a transcription

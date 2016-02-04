@@ -1,0 +1,287 @@
+/* CSS Document */
+
+html {
+    position: relative;
+    height: 100%;
+}
+
+body {
+	position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("../img/background.png");
+   	background-position: right bottom; /*Positioning*/
+   	background-repeat: no-repeat;
+}
+
+#main-container {
+	position: relative;
+	min-height: 100%;
+}
+
+#main-container > div.spacer {
+	height: 70px;
+}
+
+#main-content {
+	min-height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#main-content .spacer {
+	margin-top: 10px;
+}
+
+span.loading::before {
+    content: url("../img/spinner.gif");
+    margin-top: 4px;
+}
+span.loading::after {
+    font-style: italic;
+    content: '  Aan het werk... (Vereist 2 to 3 minuten...)';
+    vertical-align: text-bottom;
+}
+
+.tiny-loading-icon {
+  display: inline-block;
+  background-image: image-url("spinner.gif");
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  min-width: 12px;
+  min-height: 12px;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    background: white;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
+li.active > a {
+	font-weight: bold;
+}
+
+.ui-keyboard {
+	background: #FAFAFA;
+	border: 1px solid #DDD;
+	padding: 15px;
+}
+
+.ui-keyboard-button.ui-state-default {
+	background-color: #EEE;
+	border-left: 1px solid #F4F4F4;
+	border-top: 1px solid #F4F4F4;
+	border-right: 1px solid #AAA;
+	border-bottom: 1px solid #AAA;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+form, .form-group {
+	padding: 20px 0;
+}
+
+.form-group {
+	position: relative;
+}
+
+.form-group-right {
+	text-align: right;
+	padding-right: 15px;
+	padding-bottom: 0;
+}
+
+.form-group > div.panel-info {
+	position: absolute;
+	padding: 0;
+	width: 150px;
+	font-size: small;
+	height: auto;
+	top: 45px;
+	left: 45px;
+	z-index: 100;
+	background: #F9FEFF;
+}
+
+.form-group > div.panel-info > div.panel-body {
+	padding: 5px;
+}
+
+a.info-panel-toggle {
+	font-size: x-small;
+	text-decoration: none;
+	color: #269ABC;
+	margin-left: 5px;
+	border: 2px solid #269ABC;
+	padding: 0 3px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+#output {
+	padding: 20px 0;
+}
+
+#output .panel {
+	border-radius: 0;
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	box-shadow: none;
+	padding: 20px;
+}
+
+#logos {
+	margin-top: 30px;
+}
+
+#logos.col-xs-12 {
+	background: white;
+}
+
+#logos .mini-logo {
+	display: block;
+	width: auto;
+	max-width: 125px;
+	margin-bottom: 30px;
+	height: auto;
+}
+
+#logos .mini-logo.ru {
+	display: block;
+	width: auto;
+	max-width: 235px;
+	margin-bottom: 30px;
+	height: auto;
+}
+
+#logos.inline {
+	text-align: center;
+}
+
+#logos.inline .mini-logo {
+	display: inline-block;
+	width: 100px;
+	margin-right: 30px;
+	height: auto;
+}
+
+#logos.inline .mini-logo.ru {
+	display: inline-block;
+	width: 200px;
+	margin-right: 30px;
+	height: auto;
+}
+
+#footer-sm {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	font-size: x-small;
+	overflow: hidden;
+}
+
+#footer-xs {
+	width: 100%;
+	position: absolute;
+	bottom: -70px;
+	text-align: center;
+	font-size: x-small;
+	overflow: hidden;
+	background: #FFF;
+	border-top: 1px solid #CCC;
+}
+
+img.logo {
+	max-width: 60px;
+	max-height: 60px;
+}
+
+#resultaten img.taalunie-sub.logo {
+	position: absolute;
+	left: -50px;
+	top: -10px;
+}
+
+div.search {
+	margin-top: 15px;
+}
+
+div.output-group {
+	position: relative;
+}
+
+div.output-group.main {
+	font-size: 120%;
+}
+
+img.bullet-logo {
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	max-width: 24px;
+	max-height: 24px;
+}
+
+div.output-group > p {
+	margin-left: 40px;
+}
+
+a.keyboard-button {
+	position: absolute;
+	top: 0px;
+	right: -20px;
+	padding: 8px;
+	padding-top: 4px;
+	border: 1px solid #CCC;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+div[data-tooltip-id] {
+	cursor: pointer;
+}
+
+.tooltip.right .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-right-color: #910a22;
+  border-width: 5px 5px 0;
+}
+.tooltip-inner {
+  color: #000;
+  background: #fff;
+  border: solid 1px #910a22;
+}
+
+.panel-info .panel-body {
+	background: #FBFFFF;
+}
+
+span.na_field { color: #CCC; }
+
+#app-description {
+	margin-top: 15px;
+}
+
+#about {
+	padding-bottom: 20px;
+}
