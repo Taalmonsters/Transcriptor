@@ -37,8 +37,8 @@ $(document).ready(ready);
 
 
 Transcriptor = {
-//	URL of CLAM application
-	baseUrl: 'http://ticclops.uvt.nl/transapp/',
+//	URL of CLAM application [MOVED TO config/clam.properties]
+//	baseUrl: 'http://ticclops.uvt.nl/transapp/',
 //	URL where the interface is hosted
 	resetUrl: 'http://ticclops.uvt.nl/Transcriptor/',
 //	Tooltip cache
