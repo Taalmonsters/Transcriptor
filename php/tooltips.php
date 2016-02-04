@@ -1,10 +1,10 @@
 <?php
 
 	$id = '';
-	if(isset($_GET['id']) && !empty($_GET['id'])){
+	if(isset($_GET['id']) && !empty($_GET['id']) && preg_match('/^[a-zA-Z0-9\-_]+$/', $_GET['key'])){
 		$id = $_GET['id'];
 	} else {
-		echo 'ERROR: NO ID';
+		echo 'ERROR: INVALID ID';
 		exit;
 	}
 	
