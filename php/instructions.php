@@ -1,10 +1,10 @@
 <?php
 
 	$key = '';
-	if(isset($_GET['key']) && !empty($_GET['key'])){
+	if(isset($_GET['key']) && !empty($_GET['key']) && preg_match('/^[a-zA-Z0-9\-_]+$/', $_GET['key'])){
 		$key = $_GET['key'];
 	} else {
-		echo json_encode('ERROR: NO KEY');
+		echo json_encode('ERROR: INVALID KEY');
 		exit;
 	}
 	
