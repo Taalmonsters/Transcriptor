@@ -37,8 +37,10 @@ $(document).ready(ready);
 
 
 Transcriptor = {
-//	URL of CLAM application [MOVED TO config/clam.properties]
-//	baseUrl: 'http://ticclops.uvt.nl/transapp/',
+//	If true, add config/clam.properties or environment variables with appropriate credentials (see README)
+	authenticate: false,
+//	URL of CLAM application, only used when Transcriptor.authenticate = false
+	baseUrl: 'http://ticclops.uvt.nl/transapp/',
 //	URL where the interface is hosted
 	resetUrl: 'http://ticclops.uvt.nl/Transcriptor/',
 //	Tooltip cache
@@ -276,19 +278,42 @@ Transcriptor = {
 		return xhr;
 	},
 	
-	sendCORSRequest : function(url, method, callback, params) {
+	sendCORSRequest : function(url, method, callback, params, responseKey) {
 		var xhr = Transcriptor.createRequest(method, url);
 		if (!xhr) {
 			return;
 		}
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr.onload = function() {
-			if (callback != null)
-				callback(JSON.parse(xhr.responseText), params);
+			if (callback != null) {
+				if (responseKey != null) {
+					var resp = JSON.parse(xhr.responseText)
+					callback(resp[responseKey], params);
+				} else
+					callback(JSON.parse(xhr.responseText), params);
+			}
 		};
 		xhr.onerror = function() {
 		};
 		xhr.send();
+	},
+	
+	sendClamRequest : function(url, params, method, callback, callbackParams) {
+		if (Transcriptor.authenticate) {
+			params["url"] = url;
+			params["method"] = method;
+			p = [];
+			for (var i in params) {
+				p[] = i+"="+params[i];
+			}
+			Transcriptor.sendAjaxRequest("php/clam.php?"+p.join("&"), "GET", callback, callbackParams, "response");
+		} else {
+			p = [];
+			for (var i in params) {
+				p[] = i+"="+params[i];
+			}
+			Transcriptor.sendAjaxRequest(url+"?"+p.join("&"), method, callback, callbackParams);
+		}
 	},
 	
 	sendAjaxRequest : function(url, method, callback, params) {
