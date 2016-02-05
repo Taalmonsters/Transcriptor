@@ -169,12 +169,12 @@ Transcriptor = {
 	},
 	
 	createProject : function(project, name, type, from, to) {
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+project, 'PUT', Transcriptor.uploadProjectContents, { project: project, name: name, type: type, from: from, to: to });
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+project, {}, 'PUT',  Transcriptor.uploadProjectContents, { project: project, name: name, type: type, from: from, to: to });
 	},
 	
 	deleteProject : function(data, params) {
 		Transcriptor.debug("deleteProject");
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+project, 'DELETE', null, null);
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+project, {}, 'DELETE',  null, null);
 	},
 	
 	displayOutput : function(data, params) {
@@ -189,7 +189,7 @@ Transcriptor = {
 	
 	executeProject : function(data, params) {
 		Transcriptor.debug("executeProject");
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+params['project']+'?encoding=utf-8&x='+params['name']+'&lang='+params['from']+'&lang2='+params['to']+'&name='+Transcriptor.typeToName(params['type']), 'POST', Transcriptor.getProjectResult, { project: params['project'] });
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+project, {'encoding' : 'utf-8', 'lang': params['from'], 'lang2': params['to'], 'name': Transcriptor.typeToName(params['type'])}, 'POST', Transcriptor.getProjectResult, { project: params['project'] });
 	},
 	
 	generateProjectName : function() {
@@ -205,7 +205,7 @@ Transcriptor = {
 	
 	getProjectResult : function(data, params) {
 		Transcriptor.debug("getProjectResult");
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+params['project']+'/', 'GET', Transcriptor.checkProjectStatus, params);
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+params['project']+'/', {}, 'GET',  Transcriptor.checkProjectStatus, params);
 	},
 	
 	getTooltip : function() {
@@ -232,7 +232,7 @@ Transcriptor = {
 	},
 	
 	loadAvailableLanguages : function() {
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl, 'GET', Transcriptor.addLanguages, null);
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl, {}, 'GET',  Transcriptor.addLanguages, null);
 	},
 	
 	performExtendedSearch : function(name, type, from, to) {
@@ -244,16 +244,16 @@ Transcriptor = {
 	performQuickSearch : function(name) {
 		$("#output .panel").html('<span class="loading"></span>');
 		$("#output").removeClass("hidden");
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+"actions/Transliterate/?x="+name, 'GET', Transcriptor.displayOutput, null);
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+"actions/Transliterate/", {'x': name}, 'GET',  Transcriptor.displayOutput, null);
 	},
 	
 	retrieveProjectOutput : function(project) {
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+project+'/output/output.txt', 'GET', Transcriptor.displayOutput, null);
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+project+'/output/output.txt', {}, 'GET',  Transcriptor.displayOutput, null);
 	},
 	
 	uploadProjectContents : function(data, params) {
 		Transcriptor.debug("uploadProjectContents");
-		Transcriptor.sendAjaxRequest(Transcriptor.baseUrl+params['project']+'/input/input?inputtemplate=textinput&encoding=utf-8&contents='+params['name'], 'POST', Transcriptor.executeProject, params);
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+params['project']+'/input/input', {'inputtemplate': 'textinput', 'encoding': 'utf-8', 'contents': params['name']}, 'POST',  Transcriptor.executeProject, params);
 	},
 	
 	typeToName : function(type) {
