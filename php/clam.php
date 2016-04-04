@@ -35,7 +35,7 @@
 	function get_clam_response($url, $username, $password, $data, $method) {
 		$options = array(
 		        CURLOPT_URL            => $url,
-		        CURLOPT_HEADER         => true,    
+		        CURLOPT_HEADER         => false,    
 		        CURLOPT_VERBOSE        => true,
 		        CURLOPT_RETURNTRANSFER => true,
 		        CURLOPT_FOLLOWLOCATION => true,
