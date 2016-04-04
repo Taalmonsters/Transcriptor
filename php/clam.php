@@ -11,7 +11,7 @@
 				$stuff = preg_split("/ *= */", $line);
 				if ($stuff[0] === $key) {
 					fclose($handle);
-					return $stuff[1];
+					return trim($stuff[1]);
 				}
 			}
 			fclose($handle);
@@ -81,7 +81,7 @@
 		return $raw_response;
 	}
 	
-	$clam_url = (isset($_ENV['TRANSCRIPTOR_URL']) ? $_ENV['TRANSCRIPTOR_URL'] : get_clam_property('base'))+$_GET['url'];
+	$clam_url = (isset($_ENV['TRANSCRIPTOR_URL']) ? $_ENV['TRANSCRIPTOR_URL'] : get_clam_property('base')) . $_GET['url'];
 	$clam_user = (isset($_ENV['TRANSCRIPTOR_USER'])) ? $_ENV['TRANSCRIPTOR_USER'] : get_clam_property('user');
 	$clam_pass = (isset($_ENV['TRANSCRIPTOR_AUTH'])) ? $_ENV['TRANSCRIPTOR_AUTH'] : get_clam_property('auth');
 	$clam_data = get_clam_data($_GET);

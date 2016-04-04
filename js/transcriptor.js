@@ -304,13 +304,13 @@ Transcriptor = {
 			params["method"] = method;
 			p = [];
 			for (var i in params) {
-				p[] = i+"="+params[i];
+				p.push(i+"="+params[i]);
 			}
 			Transcriptor.sendAjaxRequest("php/clam.php?"+p.join("&"), "GET", callback, callbackParams, "response");
 		} else {
 			p = [];
 			for (var i in params) {
-				p[] = i+"="+params[i];
+				p.push(i+"="+params[i]);
 			}
 			Transcriptor.sendAjaxRequest(url+"?"+p.join("&"), method, callback, callbackParams);
 		}
