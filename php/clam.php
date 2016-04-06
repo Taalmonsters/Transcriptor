@@ -87,5 +87,5 @@
 	$clam_data = get_clam_data($_GET);
 	
 	$response = get_clam_response($clam_url, $clam_user, $clam_pass, $clam_data, (isset($_GET['method'])) ? $_GET['method'] : 'GET');
-	echo json_encode(array("response" => $response));
+	echo $response;
 ?>
