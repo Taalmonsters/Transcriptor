@@ -34,7 +34,7 @@
 	
 	function get_clam_response($url, $username, $password, $data, $method) {
 		$options = array(
-		        CURLOPT_URL            => $url,
+		        CURLOPT_URL            => $url . '?' . http_build_query($data),
 		        CURLOPT_HEADER         => false,    
 		        CURLOPT_VERBOSE        => true,
 		        CURLOPT_RETURNTRANSFER => true,
@@ -87,5 +87,5 @@
 	$clam_data = get_clam_data($_GET);
 	
 	$response = get_clam_response($clam_url, $clam_user, $clam_pass, $clam_data, (isset($_GET['method'])) ? $_GET['method'] : 'GET');
-	echo json_encode(array("response" => $response));
+	echo $response;
 ?>

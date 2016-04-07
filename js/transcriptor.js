@@ -189,7 +189,7 @@ Transcriptor = {
 	
 	executeProject : function(data, params) {
 		Transcriptor.debug("executeProject");
-		Transcriptor.sendClamRequest(Transcriptor.baseUrl+project, {'encoding' : 'utf-8', 'lang': params['from'], 'lang2': params['to'], 'name': Transcriptor.typeToName(params['type'])}, 'POST', Transcriptor.getProjectResult, { project: params['project'] });
+		Transcriptor.sendClamRequest(Transcriptor.baseUrl+params['project'], {'encoding' : 'utf-8', 'lang': params['from'], 'lang2': params['to'], 'name': Transcriptor.typeToName(params['type'])}, 'POST', Transcriptor.getProjectResult, { project: params['project'] });
 	},
 	
 	generateProjectName : function() {
