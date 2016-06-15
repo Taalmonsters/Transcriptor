@@ -1,39 +1,107 @@
+var templates = {
+	result: [{'<>':'div','id':'resultaten','class':'row','html':function() {
+        	return($.json2html(this.recommended,templates.recommended)+$.json2html(this.other,templates.other));
+    	}}
+	],
+	recommended: [
+	    {'<>':'div','class':'panel panel','html':[
+		    {'<>':'div','class':'row','html':[
+		        {'<>':'div','class':'col-xs-6 text-right','data-toggle':'tooltip','data-tooltip-id':'nederlands','data-placement':'left','html':[
+		           {'<>':'img','class':'advies logo','src':'afbeeldingen/${img}'}
+		        ]},
+		        {'<>':'div','class':'col-xs-6','style':'height: 60px;','html':function() {
+		        	var main_field = this.fields[0][0].value;
+		        	if (this.fields[0].length > 1)
+		        		main_field = main_field+' (${this.fields[0][1].value})';
+					return {'<>':'h3','html':'${main_field}'};
+				}},
+				{'<>':'div','class':'col-xs-1 output-group col-xs-offset-5 text-right','html':function() {
+					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
+						return {'<>':'img','class':'bullet-logo','data-pin-nopin':'true','style':'right: 0px; position: relative;','src':'afbeeldingen/wikipedia.png'};
+				}},
+				{'<>':'div','class':'col-xs-6','html':function() {
+					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
+						return {'<>':'p','html':'${this.fields[this.fields.length - 1][0].value}'};
+				}},
+				{'<>':'div','class':'col-xs-12 text-center search','html':function() {
+					var links = [];
+					links.push('[ '+$.json2html([{text:'Google',url:'https://www.google.nl/#q=${this.fields[0][0].value}&nfpr=1'}],templates.link)+' ]');
+					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
+						links.push('[ '+$.json2html([{text:'Wikipedia',url:'https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search=${this.fields[this.fields.length - 1][0].value}'}],templates.link)+' ]');
+					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
+						links.push('[ '+$.json2html([{text:'Google Maps',url:'https://www.google.com/maps?oi=map&q=${this.fields[0][0].value}'}],templates.link)+' ]');
+					return links.join('&nbsp;&nbsp;');
+				}}
+		    ]}
+		]}
+	],
+	other: [
+		{'<>':'div','class':'panel panel-default','html':[
+		    {'<>':'div','class':'row','html':[
+		        {'<>':'div','class':'col-xs-3 col-sm-2 col-md-1','html':[
+		           {'<>':'img','class':'logo','src':'afbeeldingen/${img}'}
+		        ]},
+		        {'<>':'div','class':'col-xs-9 col-sm-10 col-md-11','html':function() {
+					return($.json2html(this.fields,templates.field));
+				}}
+		    ]}
+		]}
+	],
+	external_link: [{'<>':'a','href':'${url}','target':'_blank','html':[{'<>','img','class':'external-link','src':'afbeeldingen/externe-link.png'}]}],
+	field: [
+	    {'<>':'div','class':function() {
+	    	if (this.main === 'true')
+	    		return 'output-group main';
+	    	else
+	    		return 'output-group';
+	    },'data-toggle':'tooltip','data-placement':'left','data-tooltip-id':'${id}','html':[
+	        function() { return {'<>':'img','class':'bullet-logo','src':'afbeeldingen/${bullet}'} if this.bullet.length > 0 },
+	        {'<>':'p','html':function() {
+	        	var content = (this.label.length > 0) ? '${label}: ${value}' : '${value}';
+	        	return (this.external_link.length > 0) ? content+$.json2html([{url:this.external_link}],templates.external_link) : content;
+	        }}
+	    ]}
+	],
+	link: [{'<>':'a','href':'${url}','target':'_blank','html':'${text}'}]
+};
+
 var ready;
 
 ready = function() {
 	Transcriptor.init();
-	$(document).on("mouseenter", 'div[data-tooltip-id]', function() {
-		$(this).tooltip({
-	        title: Transcriptor.getTooltip,
-	        html: true,
-	        container: 'body',
-	    });
-		$(this).tooltip('show');
-	});
-
-	$(document).on("mouseleave", 'div[data-tooltip-id]', function() {
-		$(this).tooltip('hide');
-	});
-	
-	$(document).on('click', 'ul.nav > li > a', function (e) {
-		Transcriptor.currentTab = $(this).data('tab-id');
-		if (Transcriptor.currentTab == 1) {
-			$("#app div.extended-form").addClass("hidden");
-			$("#app div.simple-form").removeClass("hidden");
-		} else if (Transcriptor.currentTab == 2) {
-			$("#app div.simple-form").addClass("hidden");
-			$("#app div.extended-form").removeClass("hidden");
-		}
-    });
-	
-	$(document).keypress(function(e) {
-		console.log("keypress");
-		if (e.which == 13)
-			$("#app .btn-submit").trigger("click");
-	});
 };
 
 $(document).ready(ready);
+
+$(document).on("mouseenter", 'div[data-tooltip-id]', function() {
+	$(this).tooltip({
+        title: Transcriptor.getTooltip,
+        html: true,
+        container: 'body',
+    });
+	$(this).tooltip('show');
+});
+
+$(document).on("mouseleave", 'div[data-tooltip-id]', function() {
+	$(this).tooltip('hide');
+});
+
+$(document).on('click', 'ul.nav > li > a', function (e) {
+	Transcriptor.currentTab = $(this).data('tab-id');
+	if (Transcriptor.currentTab == 1) {
+		$("#app div.extended-form").addClass("hidden");
+		$("#app div.simple-form").removeClass("hidden");
+	} else if (Transcriptor.currentTab == 2) {
+		$("#app div.simple-form").addClass("hidden");
+		$("#app div.extended-form").removeClass("hidden");
+	}
+});
+
+$(document).keypress(function(e) {
+	console.log("keypress");
+	if (e.which == 13)
+		$("#app .btn-submit").trigger("click");
+});
 
 
 Transcriptor = {
@@ -180,11 +248,7 @@ Transcriptor = {
 	displayOutput : function(data, params) {
 		Transcriptor.debug("displayOutput");
 		Transcriptor.debug(data);
-		if (data.indexOf('id="resultaten"') > -1) {
-			$("#output .panel").html($.parseHTML(data));
-		} else {
-			$("#output .panel").html(data.replace(/\n/g, "<br/>"));
-		}
+		$('#output-panel').json2html(data, templates.result);
 	},
 	
 	executeProject : function(data, params) {
