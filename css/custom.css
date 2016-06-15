@@ -285,3 +285,16 @@ span.na_field { color: #CCC; }
 #about {
 	padding-bottom: 20px;
 }
+
+.main-block-link:before {
+	content: ' [ ';
+	text-decoration: none;
+	color: black;
+}
+
+.main-block-link:after {
+	content: ' ] ';
+	text-decoration: none;
+	color: black;
+}
+
