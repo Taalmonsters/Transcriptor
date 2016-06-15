@@ -1,6 +1,6 @@
 var templates = {
 	result: [{'<>':'div','id':'resultaten','class':'row','html':function() {
-        	return($.json2html(this.recommended,templates.recommended)+$.json2html(this.other,templates.other));
+        	return($.json2html(this.recommended,templates.recommended).html+$.json2html(this.other,templates.other).html);
     	}}
 	],
 	recommended: [
@@ -12,8 +12,8 @@ var templates = {
 		        {'<>':'div','class':'col-xs-6','style':'height: 60px;','html':function() {
 		        	var main_field = this.fields[0][0].value;
 		        	if (this.fields[0].length > 1)
-		        		main_field = main_field+' (${this.fields[0][1].value})';
-					return {'<>':'h3','html':'${main_field}'};
+		        		main_field = main_field+' ('+this.fields[0][1].value+')';
+					return $.json2html({main_field: main_field},templates.main_field_title);
 				}},
 				{'<>':'div','class':'col-xs-1 output-group col-xs-offset-5 text-right','html':function() {
 					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
@@ -21,20 +21,21 @@ var templates = {
 				}},
 				{'<>':'div','class':'col-xs-6','html':function() {
 					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						return {'<>':'p','html':'${this.fields[this.fields.length - 1][0].value}'};
+						return {'<>':'p','html':this.fields[this.fields.length - 1][0].value};
 				}},
 				{'<>':'div','class':'col-xs-12 text-center search','html':function() {
 					var links = [];
-					links.push('[ '+$.json2html([{text:'Google',url:'https://www.google.nl/#q=${this.fields[0][0].value}&nfpr=1'}],templates.link)+' ]');
+					links.push({text:'Google',url:'https://www.google.nl/#q='+this.fields[0][0].value+'&nfpr=1'});
 					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						links.push('[ '+$.json2html([{text:'Wikipedia',url:'https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search=${this.fields[this.fields.length - 1][0].value}'}],templates.link)+' ]');
+						links.push({text:'Wikipedia',url:'https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search='+this.fields[this.fields.length - 1][0].value});
 					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						links.push('[ '+$.json2html([{text:'Google Maps',url:'https://www.google.com/maps?oi=map&q=${this.fields[0][0].value}'}],templates.link)+' ]');
-					return links.join('&nbsp;&nbsp;');
+						links.push({text:'Google Maps',url:'https://www.google.com/maps?oi=map&q='+this.fields[0][0].value});
+					return $.json2html(links,templates.link);
 				}}
 		    ]}
 		]}
 	],
+	main_field_title: [{'<>':'h3','html':'${main_field}'}],
 	other: [
 		{'<>':'div','class':'panel panel-default','html':[
 		    {'<>':'div','class':'row','html':[
@@ -50,22 +51,26 @@ var templates = {
 	external_link: [{'<>':'a','href':'${url}','target':'_blank','html':[{'<>':'img','class':'external-link','src':'afbeeldingen/externe-link.png'}]}],
 	field: [
 	    {'<>':'div','class':function() {
-	    	if (this.main === 'true')
+	    	if (this[0].main === 'true')
 	    		return 'output-group main';
 	    	else
 	    		return 'output-group';
-	    },'data-toggle':'tooltip','data-placement':'left','data-tooltip-id':'${id}','html':[
-	        function() {
-	        	if ('${bullet}'.length > 0)
-	        		return {'<>':'img','class':'bullet-logo','src':'afbeeldingen/${bullet}'}
-	        },
-	        {'<>':'p','html':function() {
-	        	var content = ('${label}'.length > 0) ? '${label}: ${value}' : '${value}';
-	        	return ('${external_link}'.length > 0) ? content+$.json2html([{url:'${external_link}'}],templates.external_link) : content;
-	        }}
-	    ]}
+	    },'data-toggle':'tooltip','data-placement':'left','data-tooltip-id':function() {
+	    	return this[0].id;
+	    },'html':function() {
+	    	var bullet = '';
+	    	if (this[0].bullet && this[0].bullet.length > 0)
+	    		bullet = $.json2html(this,templates.bullet).html;
+	    	var content = $.json2html(this,templates.content).html;
+	    	return bullet+content;
+	    }}
 	],
-	link: [{'<>':'a','href':'${url}','target':'_blank','html':'${text}'}]
+	link: [{'<>':'a','href':'${url}','class':'main-block-link','target':'_blank','html':'${text}'}],
+	bullet: [{'<>':'img','class':'bullet-logo','src':'afbeeldingen/${bullet}'}],
+	content: [{'<>':'p','html':function() {
+    	var c = (this.label.length > 0) ? this.label+': '+this.value : this.value;
+    	return (this.external_link && this.external_link.length > 0) ? c+$.json2html({url:this.external_link},templates.external_link).html : c;
+    }}]
 };
 
 var ready;
@@ -251,7 +256,7 @@ Transcriptor = {
 	displayOutput : function(data, params) {
 		Transcriptor.debug("displayOutput");
 		Transcriptor.debug(data);
-		$('#output-panel').json2html(data, templates.result);
+		$('#output-panel').html($.json2html(data, templates.result).html);
 	},
 	
 	executeProject : function(data, params) {
