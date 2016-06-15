@@ -47,7 +47,7 @@ var templates = {
 		    ]}
 		]}
 	],
-	external_link: [{'<>':'a','href':'${url}','target':'_blank','html':[{'<>','img','class':'external-link','src':'afbeeldingen/externe-link.png'}]}],
+	external_link: [{'<>':'a','href':'${url}','target':'_blank','html':[{'<>':'img','class':'external-link','src':'afbeeldingen/externe-link.png'}]}],
 	field: [
 	    {'<>':'div','class':function() {
 	    	if (this.main === 'true')
