@@ -61,7 +61,7 @@ var templates = {
 	        },
 	        {'<>':'p','html':function() {
 	        	var content = ('${label}'.length > 0) ? '${label}: ${value}' : '${value}';
-	        	return (this.external_link.length > 0) ? content+$.json2html([{url:this.external_link}],templates.external_link) : content;
+	        	return ('${external_link}'.length > 0) ? content+$.json2html([{url:'${external_link}'}],templates.external_link) : content;
 	        }}
 	    ]}
 	],
