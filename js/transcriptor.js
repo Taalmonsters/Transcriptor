@@ -56,11 +56,11 @@ var templates = {
 	    		return 'output-group';
 	    },'data-toggle':'tooltip','data-placement':'left','data-tooltip-id':'${id}','html':[
 	        function() {
-	        	if (this.bullet.length > 0)
+	        	if ('${bullet}'.length > 0)
 	        		return {'<>':'img','class':'bullet-logo','src':'afbeeldingen/${bullet}'}
 	        },
 	        {'<>':'p','html':function() {
-	        	var content = (this.label.length > 0) ? '${label}: ${value}' : '${value}';
+	        	var content = ('${label}'.length > 0) ? '${label}: ${value}' : '${value}';
 	        	return (this.external_link.length > 0) ? content+$.json2html([{url:this.external_link}],templates.external_link) : content;
 	        }}
 	    ]}
