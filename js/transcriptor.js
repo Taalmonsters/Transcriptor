@@ -251,7 +251,7 @@ Transcriptor = {
 	displayOutput : function(data, params) {
 		Transcriptor.debug("displayOutput");
 		Transcriptor.debug(data);
-		$('#output-panel').json2html(data, templates.result);
+		$('#output-panel').html(json2html(data, templates.result));
 	},
 	
 	executeProject : function(data, params) {
