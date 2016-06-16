@@ -42,7 +42,7 @@ span.loading::before {
 }
 span.loading::after {
     font-style: italic;
-    content: '  Aan het werk... (Vereist 2 to 3 minuten...)';
+    content: '  Aan het werk... (Vereist 2 tot 3 minuten...)';
     vertical-align: text-bottom;
 }
 
