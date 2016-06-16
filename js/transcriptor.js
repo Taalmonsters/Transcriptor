@@ -109,60 +109,6 @@ $(document).keypress(function(e) {
 		$("#app .btn-submit").trigger("click");
 });
 
-$(".btn-reset").click(function(e){
-	e.preventDefault();
-	window.location = Transcriptor.resetUrl;
-});
-
-$("#open-keyboard").click(function(e){
-	e.preventDefault();
-	var kb = $('#name').getkeyboard();
-	if ( kb.isOpen ) {
-		kb.accept();
-		kb.close();
-	} else {
-		kb.reveal();
-	}
-});
-
-$("#app .btn-submit").click(function(e){
-	e.preventDefault();
-	var name = $("#name").val();
-	var type = $('input:radio[name=type]:checked').val();
-	if (Transcriptor.currentTab == 1) {
-		if (name != null && name.length > 0) {
-			if (type === 'loc') {
-				name = name + "_LOC";
-			} else if (type === 'other') {
-				name = name + "_OTH";
-			}
-			Transcriptor.debug(name);
-			Transcriptor.performQuickSearch(name);
-		}
-	} else if (Transcriptor.currentTab == 2) {
-		var from_lang = $( "#from-lang option:selected" ).val();
-		var to_lang = $( "#to-lang option:selected" ).val();
-		if (name != null && name.length > 0) {
-			$("#output .panel").html('<span class="loading"></span>');
-			$("#output").removeClass("hidden");
-			Transcriptor.debug(name);
-			Transcriptor.performExtendedSearch(name, type, from_lang, to_lang);
-		}
-	}
-});
-
-$("a.info-panel-toggle").click(function(e) {
-	e.preventDefault();
-	e.stopPropagation();
-//	var key = $(this).data("key");
-	var target = $(this).data("target");
-	$("#"+target).toggleClass("hidden");
-//	if ($("#"+target+" .panel-body").html().length == 0) {
-//		$("#"+target+" .panel-body").html('<span class="loading"></span>');
-//		Transcriptor.sendCORSRequest('php/instructions.php?key='+key, 'GET', Transcriptor.addInstructions, target);
-//	}
-});
-
 
 Transcriptor = {
 //	If true, add config/clam.properties or environment variables with appropriate credentials (see README)
@@ -187,13 +133,67 @@ Transcriptor = {
 	
 	init : function() {
 		
+		$(".btn-reset").click(function(e){
+			e.preventDefault();
+			window.location = Transcriptor.resetUrl;
+		});
+		
+		$("#open-keyboard").click(function(e){
+			e.preventDefault();
+			var kb = $('#name').getkeyboard();
+			if ( kb.isOpen ) {
+				kb.accept();
+				kb.close();
+			} else {
+				kb.reveal();
+			}
+		});
+		
+		$("#app .btn-submit").click(function(e){
+			e.preventDefault();
+			var name = $("#name").val();
+			var type = $('input:radio[name=type]:checked').val();
+			if (Transcriptor.currentTab == 1) {
+				if (name != null && name.length > 0) {
+					if (type === 'loc') {
+						name = name + "_LOC";
+					} else if (type === 'other') {
+						name = name + "_OTH";
+					}
+					Transcriptor.debug(name);
+					Transcriptor.performQuickSearch(name);
+				}
+			} else if (Transcriptor.currentTab == 2) {
+				var from_lang = $( "#from-lang option:selected" ).val();
+				var to_lang = $( "#to-lang option:selected" ).val();
+				if (name != null && name.length > 0) {
+					$("#output .panel").html('<span class="loading"></span>');
+					$("#output").removeClass("hidden");
+					Transcriptor.debug(name);
+					Transcriptor.performExtendedSearch(name, type, from_lang, to_lang);
+				}
+			}
+		});
+		
+		$("a.info-panel-toggle").click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+//			var key = $(this).data("key");
+			var target = $(this).data("target");
+			$("#"+target).toggleClass("hidden");
+//			if ($("#"+target+" .panel-body").html().length == 0) {
+//				$("#"+target+" .panel-body").html('<span class="loading"></span>');
+//				Transcriptor.sendCORSRequest('php/instructions.php?key='+key, 'GET', Transcriptor.addInstructions, target);
+//			}
+		});
+		
 		$.getJSON( "config/transcriptor.json", function( data ) {
 			Transcriptor.tooltips = data.tooltips;
 			$("#app-description").html('<div class="panel panel-info"><div class="panel-body">'+data.description+'</div></div>');
 			$("#about > div").append(data.info);
 			Transcriptor.addLogos(data.logos);
 			
-			$.each("a.info-panel-toggle", function() {
+			$.each(document.getElementsByClassName("a.info-panel-toggle"), function() {
 				var key = $(this).data("key");
 				var target = $(this).data("target");
 				if ($("#"+target+" .panel-body").html().length == 0)
