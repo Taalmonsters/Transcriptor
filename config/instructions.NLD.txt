@@ -1,4 +1,0 @@
-name;Voer een naam in. Deze mag uit meerdere woorden bestaan. Bij invoer in het Engels krijg je het Nederlandse hoofdadvies alsook de Engelse en Duitse transcriptie terug. Bij Cyrillische invoer krijg je voorgaande alsook een reeks wetenschappelijke, administratieve en gestandaardiseerde transcripties terug.
-type;Specificeer of het gaat om een persoonsnaam, dan wel een aardrijkskundige naam.
-interlang;De tussentaal is de taal waarvan je veronderstelt dat de naam oorspronkelijk uit afkomstig is.
-destlang;De doeltaal is de taal waarin je de transcriptie wilt.
