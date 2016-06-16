@@ -254,7 +254,10 @@ Transcriptor = {
 	displayOutput : function(data, params) {
 		Transcriptor.debug("displayOutput");
 		Transcriptor.debug(data);
-		$('#output-panel').html($.json2html(data, templates.result).html);
+		if (Transcriptor.currentTab == 1)
+			$('#output-panel').html($.json2html(data, templates.result).html);
+		else
+			$("#output-panel").html(data.replace(/\n/g, "<br/>"));
 	},
 	
 	executeProject : function(data, params) {
