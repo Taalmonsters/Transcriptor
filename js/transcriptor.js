@@ -193,7 +193,7 @@ Transcriptor = {
 			$("#about > div").append(data.info);
 			Transcriptor.addLogos(data.logos);
 			
-			$.each(document.getElementsByClassName("a.info-panel-toggle"), function() {
+			$.each(document.getElementsByClassName("info-panel-toggle"), function() {
 				var key = $(this).data("key");
 				var target = $(this).data("target");
 				if ($("#"+target+" .panel-body").html().length == 0)
