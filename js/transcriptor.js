@@ -178,13 +178,8 @@ Transcriptor = {
 		$("a.info-panel-toggle").click(function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-//			var key = $(this).data("key");
 			var target = $(this).data("target");
 			$("#"+target).toggleClass("hidden");
-//			if ($("#"+target+" .panel-body").html().length == 0) {
-//				$("#"+target+" .panel-body").html('<span class="loading"></span>');
-//				Transcriptor.sendCORSRequest('php/instructions.php?key='+key, 'GET', Transcriptor.addInstructions, target);
-//			}
 		});
 		
 		$.getJSON( "config/transcriptor.json", function( data ) {
