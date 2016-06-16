@@ -122,7 +122,7 @@ Transcriptor = {
 	currentTab: 1,
 	
 //	Set to true to turn on logging in JS console
-	doDebug: true,
+	doDebug: false,
 	
 	debug : function(msg) {
 		if (Transcriptor.doDebug)
