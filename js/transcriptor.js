@@ -122,7 +122,7 @@ Transcriptor = {
 	currentTab: 1,
 	
 //	Set to true to turn on logging in JS console
-	doDebug: false,
+	doDebug: true,
 	
 	debug : function(msg) {
 		if (Transcriptor.doDebug)
@@ -254,10 +254,13 @@ Transcriptor = {
 	displayOutput : function(data, params) {
 		Transcriptor.debug("displayOutput");
 		Transcriptor.debug(data);
-		if (Transcriptor.currentTab == 1)
+		if (Transcriptor.currentTab == 1) {
+			Transcriptor.debug("tab 1");
 			$('#output-panel').html($.json2html(data, templates.result).html);
-		else
+		} else {
+			Transcriptor.debug("tab 2");
 			$("#output-panel").html(data.replace(/\n/g, "<br/>"));
+		}
 	},
 	
 	executeProject : function(data, params) {
