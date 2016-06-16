@@ -109,6 +109,60 @@ $(document).keypress(function(e) {
 		$("#app .btn-submit").trigger("click");
 });
 
+$(".btn-reset").click(function(e){
+	e.preventDefault();
+	window.location = Transcriptor.resetUrl;
+});
+
+$("#open-keyboard").click(function(e){
+	e.preventDefault();
+	var kb = $('#name').getkeyboard();
+	if ( kb.isOpen ) {
+		kb.accept();
+		kb.close();
+	} else {
+		kb.reveal();
+	}
+});
+
+$("#app .btn-submit").click(function(e){
+	e.preventDefault();
+	var name = $("#name").val();
+	var type = $('input:radio[name=type]:checked').val();
+	if (Transcriptor.currentTab == 1) {
+		if (name != null && name.length > 0) {
+			if (type === 'loc') {
+				name = name + "_LOC";
+			} else if (type === 'other') {
+				name = name + "_OTH";
+			}
+			Transcriptor.debug(name);
+			Transcriptor.performQuickSearch(name);
+		}
+	} else if (Transcriptor.currentTab == 2) {
+		var from_lang = $( "#from-lang option:selected" ).val();
+		var to_lang = $( "#to-lang option:selected" ).val();
+		if (name != null && name.length > 0) {
+			$("#output .panel").html('<span class="loading"></span>');
+			$("#output").removeClass("hidden");
+			Transcriptor.debug(name);
+			Transcriptor.performExtendedSearch(name, type, from_lang, to_lang);
+		}
+	}
+});
+
+$("a.info-panel-toggle").click(function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+//	var key = $(this).data("key");
+	var target = $(this).data("target");
+	$("#"+target).toggleClass("hidden");
+//	if ($("#"+target+" .panel-body").html().length == 0) {
+//		$("#"+target+" .panel-body").html('<span class="loading"></span>');
+//		Transcriptor.sendCORSRequest('php/instructions.php?key='+key, 'GET', Transcriptor.addInstructions, target);
+//	}
+});
+
 
 Transcriptor = {
 //	If true, add config/clam.properties or environment variables with appropriate credentials (see README)
@@ -133,83 +187,30 @@ Transcriptor = {
 	
 	init : function() {
 		
-		$(".btn-reset").click(function(e){
-			e.preventDefault();
-			window.location = Transcriptor.resetUrl;
-		});
-		
-		$("#open-keyboard").click(function(e){
-			e.preventDefault();
-			var kb = $('#name').getkeyboard();
-			if ( kb.isOpen ) {
-				kb.accept();
-				kb.close();
-			} else {
-				kb.reveal();
-			}
-		});
-		
-		$("#app .btn-submit").click(function(e){
-			e.preventDefault();
-			var name = $("#name").val();
-			var type = $('input:radio[name=type]:checked').val();
-			if (Transcriptor.currentTab == 1) {
-				if (name != null && name.length > 0) {
-					if (type === 'loc') {
-						name = name + "_LOC";
-					} else if (type === 'other') {
-						name = name + "_OTH";
-					}
-					Transcriptor.debug(name);
-					Transcriptor.performQuickSearch(name);
-				}
-			} else if (Transcriptor.currentTab == 2) {
-				var from_lang = $( "#from-lang option:selected" ).val();
-				var to_lang = $( "#to-lang option:selected" ).val();
-				if (name != null && name.length > 0) {
-					$("#output .panel").html('<span class="loading"></span>');
-					$("#output").removeClass("hidden");
-					Transcriptor.debug(name);
-					Transcriptor.performExtendedSearch(name, type, from_lang, to_lang);
-				}
-			}
-		});
-		
-		$("a.info-panel-toggle").click(function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-			var key = $(this).data("key");
-			var target = $(this).data("target");
-			$("#"+target).toggleClass("hidden");
-			if ($("#"+target+" .panel-body").html().length == 0) {
-				$("#"+target+" .panel-body").html('<span class="loading"></span>');
-				Transcriptor.sendCORSRequest('php/instructions.php?key='+key, 'GET', Transcriptor.addInstructions, target);
-			}
-		});
-		
-		$.getJSON( "config/tooltips.json", function( data ) {
-			Transcriptor.tooltips = data;
+		$.getJSON( "config/transcriptor.json", function( data ) {
+			Transcriptor.tooltips = data.tooltips;
+			$("#app-description").html('<div class="panel panel-info"><div class="panel-body">'+data.description+'</div></div>');
+			$("#about > div").append(data.info);
+			Transcriptor.addLogos(data.logos);
+			
+			$.each("a.info-panel-toggle", function() {
+				var key = $(this).data("key");
+				var target = $(this).data("target");
+				if ($("#"+target+" .panel-body").html().length == 0)
+					$("#"+target+" .panel-body").html(data.instructions[key]);
+			});
 		});
 
-		Transcriptor.sendCORSRequest('php/about.php', 'GET', Transcriptor.addAbout, null);
-		Transcriptor.sendCORSRequest('php/logos.php', 'GET', Transcriptor.addLogos, null);
 		Transcriptor.loadAvailableLanguages();
 	},
 	
 //	Transcriptor methods (CLAM communication and data display)
-	
-	addAbout : function(data, p) {
-		$(data).each(function (i, item) {
-            $("#about > div").append(item);
-        });
-	},
 	
 	addInstructions : function(data, target) {
 		$("#"+target+" .panel-body").html(data);
 	},
 	
 	addLanguages : function(xml, target) {
-		$("#app-description").html('<div class="panel panel-info"><div class="panel-body">'+$(xml).find('description').text()+'</div></div>');
 		Transcriptor.addLanguagesForType(xml, "lang", "from-lang");
 		Transcriptor.addLanguagesForType(xml, "lang2", "to-lang");
 	},
@@ -224,13 +225,13 @@ Transcriptor = {
 		}
 	},
 	
-	addLogos : function(data, p) {
+	addLogos : function(data) {
 		$(data).each(function (i, item) {
 			var cl = '';
 			if (i == 0) {
 				cl = 'ru';
 			}
-            $("#logos > div").append("<a href='"+item.link+"' target='_blank'><img class='mini-logo "+cl+"' alt='"+item.alt+"' src='" + item.img + "'></a>");
+            $("#logos > div").append("<a href='"+item.url+"' target='_blank'><img class='mini-logo "+cl+"' alt='"+item.text+"' src='" + item.img + "'></a>");
         });
 	},
 	

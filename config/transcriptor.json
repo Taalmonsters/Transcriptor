@@ -1,0 +1,40 @@
+{
+	"description": "De Transcriptor geeft Russische persoonsnamen, aardrijkskundige aanduidingen en woorden weer in de schrijfwijze die voor het Nederlandse taalgebied aanbevolen is. Klik op Info voor meer informatie.",
+	"info": "Place some information regarding the application here. You can find me in config/transcriptor.json.",
+	"instructions" : {
+		"name": "Voer een naam in. Deze mag uit meerdere woorden bestaan. Vlug Omzetten aanvaardt Engelse en Russische invoer.",
+		"type": "Specificeer of het gaat om een persoonsnaam, dan wel een aardrijkskundige naam.",
+		"interlang": "De tussentaal is de taal waarvan je veronderstelt dat de naam oorspronkelijk uit afkomstig is.",
+		"destlang": "De doeltaal is de taal waarin je de transcriptie wilt."
+	},
+	"logos": [
+		{ "img":"img/logos/Radboud.logo.a4-pms-nl.jpg", "url":"http://www.ru.nl/", "text":"Radboud" },
+		{ "img":"img/logos/Logo_onze_taal.jpg", "url":"http://onzetaal.nl/", "text":"Onze Taal" },
+		{ "img":"img/logos/Taalunie.logo_rgb_middel_1.jpg", "url":"http://taalunie.org/", "text":"Taalunie" },
+		{ "img":"img/logos/ANP.logo.png", "url":"http://www.anp.nl/", "text":"ANP" },
+		{ "img":"img/logos/NOS.logo.jpg", "url":"http://nos.nl/", "text":"NOS" },
+		{ "img":"img/logos/VRT.logo.gif", "url":"http://www.vrt.be/en", "text":"VRT" },
+		{ "img":"img/logos/TilburgUniversity2.png", "url":"https://www.tilburguniversity.edu/research/institutes-and-research-groups/ticc/", "text":"TiCC/Tilburg" }
+	],
+	"tooltips": {
+		"nederlands": "Aanbevolen schrijfwijze in Nederlandstalige teksten voor een algemeen publiek.",
+		"engels": "Gebruikelijke schrijfwijze(n) in Engelstalige algemene teksten voor een algemeen publiek.",
+		"duits": "Gebruikelijke schrijfwijze in Duitstalige algemene teksten voor een algemeen publiek.",
+		"wetenschappelijk1": "Gebruikelijke transliteratie onder slavisten en in specialistische wetenschappelijke publicaties.",
+		"wetenschappelijk2": "Schrijfwijze in de catalogus van de Koninklijke Bibliotheek (Nederland).<br/><br/>Klik op de link om rechtstreeks in de catalogus te zoeken.",
+		"ALA-LC": "Transliteratie volgens het ALA-LC-systeem van de American Library Association en de Amerikaanse Library of Congress.<br/><br/>Veelgebruikte transliteratie onder Engelstalige slavisten en in Engelstalige wetenschappelijke publicaties.",
+		"ALA-LC-simpel": "Transliteratie volgens een versimpelde versie van het ALA-LC-systeem, zonder diakritische tekens.<br/><br/>Het weglaten van de diakritische tekens maakt de transliteratie leesbaarder, maar in sommige gevallen ambigu.",
+		"GOST-1983": "Aanbevolen schrijfwijze door de VN voor aardrijkskundige namen.",
+		"taalunie": "Aanbevolen schrijfwijze door de Nederlandse Taalunie voor aardrijkskundige namen.",
+		"BGN-PCGN": "Aanbevolen schrijfwijze voor Amerikaans en Brits officieel gebruik (aardrijkskundige namen).",
+		"GOST-2004": "Schrijfwijze zoals voorgeschreven voor wegwijzers in Rusland.<br/><br/>In de praktijk wordt deze schrijfwijze niet altijd gevolgd.",
+		"british-standard-ALA-LC": "Schrijfwijze in de catalogus van de British Library (Verenigd Koninkrijk).<br/><br/>In 1975 heeft de British Library haar systeem aangepast. Soms zijn daardoor twee schrijfwijzen mogelijk.<br/><br/>Klik op de link om rechtstreeks in de catalogus te zoeken.",
+		"ICAO": "Standaardschrijfwijze van persoonsnamen in Russische paspoorten sinds 2013.<br/><br/>Op verzoek kan in een Russisch paspoort ook de schrijfwijze in een eerder paspoort of ander officieel document worden gehanteerd. In de praktijk komt daardoor variatie voor.",
+		"GOST_R_52535.1-2006": "Standaardschrijfwijze in Russische paspoorten tussen 2010 en 2013.<br/><br/>Op verzoek kan in een Russisch paspoort ook de schrijfwijze in een eerder paspoort of ander officieel document worden gehanteerd. In de praktijk komt daardoor variatie voor.",
+		"paspoort-1997-2010": "Standaardschrijfwijze in Russische paspoorten tussen 1997 en 2010.<br/><br/>Op verzoek kan in een Russisch paspoort ook de schrijfwijze in een eerder paspoort of ander officieel document worden gehanteerd. In de praktijk komt daardoor variatie voor.",
+		"paspoort-ussr": "Schrijfwijze in paspoorten van de Sovjet-Unie en Rusland tot 1997.<br/><br/>Deze schrijfwijze is gebaseerd op het Frans en kent veel, niet altijd gedocumenteerde uitzonderingen. De hier gegeven schrijfwijze kan in de praktijk dan ook afwijken.",
+		"rijbewijs": "Schrijfwijze in Russische rijbewijzen sinds 2000.<br/><br/>Op verzoek kan in een Russisch rijbewijs ook de schrijfwijze uit het paspoort worden gehanteerd. In de praktijk komt daardoor variatie voor.",
+		"GOST-2000a": "Transliteratie volgens de ISO-norm 9:1995 voor internationale gegevensuitwisseling, met name langs elektronische weg. Zeer strikte, altijd omkeerbare transliteratie.<br/><br/>Deze transliteratie is in Rusland en enkele andere ex-Sovjet-staten ingevoerd als systeem A uit de norm GOST 7.79-2000, systeem A.",
+		"GOST-2000b": "Transliteratie volgens systeem B uit de norm GOST 7.79-2000, geldend in Rusland en enkele andere ex-Sovjet-staten voor gegevensuitwisseling, met name langs elektronische weg."
+	}
+}
