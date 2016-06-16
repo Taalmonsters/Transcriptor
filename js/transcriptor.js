@@ -14,14 +14,14 @@ var templates = {
 					return main_img+$.json2html({main_field: main_field},templates.main_field_title).html;
 		        }},
 		        {'<>':'div','class':'col-xs-12 main-output-group text-center','html':function() {
-		        	var wiki_img = (this.fields[1][0].id === 'wikipedia') ? $.json2html({},templates.wiki_img).html : '';
-					var wiki_val = (this.fields[1][0].id === 'wikipedia') ? $.json2html({value: this.fields[1][0].value},templates.wiki_value).html : '';
+		        	var wiki_img = (this.fields.length > 1 && this.fields[1][0].id === 'wikipedia') ? $.json2html({},templates.wiki_img).html : '';
+					var wiki_val = (this.fields.length > 1 && this.fields[1][0].id === 'wikipedia') ? $.json2html({value: this.fields[1][0].value},templates.wiki_value).html : '';
 					return wiki_img+wiki_val;
 				}},
 				{'<>':'div','class':'col-xs-12 text-center search','html':function() {
 					var links = [];
 					links.push({text:'Google',url:'https://www.google.nl/#q='+this.fields[0][0].value+'&nfpr=1'});
-					if (this.fields[1][0].id === 'wikipedia')
+					if (this.fields.length > 1 && this.fields[1][0].id === 'wikipedia')
 						links.push({text:'Wikipedia',url:'https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search='+this.fields[1][0].value});
 					if (this.google_maps && this.google_maps.length > 0)
 						links.push({text:'Google Maps',url:'https://www.google.com/maps?oi=map&q='+this.google_maps});
