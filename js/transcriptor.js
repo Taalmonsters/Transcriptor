@@ -189,8 +189,6 @@ Transcriptor = {
 		
 		$.getJSON( "config/tooltips.json", function( data ) {
 			Transcriptor.tooltips = data;
-			Transcriptor.debug("tooltips loaded:");
-			Transcriptor.debug(Transcriptor.tooltips);
 		});
 
 		Transcriptor.sendCORSRequest('php/about.php', 'GET', Transcriptor.addAbout, null);
@@ -291,18 +289,6 @@ Transcriptor = {
 		    if (id in Transcriptor.tooltips){
 		        return Transcriptor.tooltips[id];
 		    }
-	
-		    var localData = "error";
-	
-		    $.ajax('php/tooltips.php?id='+id, {
-		        async: false,
-		        success: function(data){
-		            localData = data;
-		        }
-		    });
-	
-		    Transcriptor.tooltips[id] = localData;
-		    return localData;
 		}
 		return false;
 	},
