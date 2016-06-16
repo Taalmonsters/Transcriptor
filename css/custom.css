@@ -8,6 +8,8 @@ html {
 body {
 	position: relative;
     min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     background-image: url("../img/background.png");
@@ -286,6 +288,10 @@ span.na_field { color: #CCC; }
 	padding-bottom: 20px;
 }
 
+.main-block-link, .main-block-link:hover, .main-block-link:active, .main-block-link:visited, .main-block-link:focus {
+	text-decoration: none;
+}
+
 .main-block-link:before {
 	content: ' [ ';
 	text-decoration: none;
@@ -296,5 +302,26 @@ span.na_field { color: #CCC; }
 	content: ' ] ';
 	text-decoration: none;
 	color: black;
+}
+
+h3.main-field-title {
+	display:inline-block;
+	margin: 0;
+	vertical-align: middle;
+	padding-left: 15px;
+}
+
+div.main-output-group {
+	padding-top: 5px;
+}
+
+div.main-output-group > img, div.main-output-group > p {
+	display:inline-block;
+	vertical-align: middle;
+}
+
+div.main-output-group > p {
+	padding-left: 10px;
+	margin: 0;
 }
 

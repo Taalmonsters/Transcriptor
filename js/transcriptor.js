@@ -6,36 +6,34 @@ var templates = {
 	recommended: [
 	    {'<>':'div','class':'panel panel','html':[
 		    {'<>':'div','class':'row','html':[
-		        {'<>':'div','class':'col-xs-6 text-right','data-toggle':'tooltip','data-tooltip-id':'nederlands','data-placement':'left','html':[
-		           {'<>':'img','class':'advies logo','src':'afbeeldingen/${img}'}
-		        ]},
-		        {'<>':'div','class':'col-xs-6','style':'height: 60px;','html':function() {
+		        {'<>':'div','class':'col-xs-8 col-xs-offset-2 text-center','data-toggle':'tooltip','data-tooltip-id':'nederlands','data-placement':'left','html':function() {
+		        	var main_img = $.json2html(this,templates.main_img).html;
 		        	var main_field = this.fields[0][0].value;
 		        	if (this.fields[0].length > 1)
 		        		main_field = main_field+' ('+this.fields[0][1].value+')';
-					return $.json2html({main_field: main_field},templates.main_field_title);
-				}},
-				{'<>':'div','class':'col-xs-1 output-group col-xs-offset-5 text-right','html':function() {
-					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						return {'<>':'img','class':'bullet-logo','data-pin-nopin':'true','style':'right: 0px; position: relative;','src':'afbeeldingen/wikipedia.png'};
-				}},
-				{'<>':'div','class':'col-xs-6','html':function() {
-					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						return {'<>':'p','html':this.fields[this.fields.length - 1][0].value};
+					return main_img+$.json2html({main_field: main_field},templates.main_field_title).html;
+		        }},
+		        {'<>':'div','class':'col-xs-12 main-output-group text-center','html':function() {
+		        	var wiki_img = (this.fields[1][0].id === 'wikipedia') ? $.json2html({},templates.wiki_img).html : '';
+					var wiki_val = (this.fields[1][0].id === 'wikipedia') ? $.json2html({value: this.fields[1][0].value},templates.wiki_value).html : '';
+					return wiki_img+wiki_val;
 				}},
 				{'<>':'div','class':'col-xs-12 text-center search','html':function() {
 					var links = [];
 					links.push({text:'Google',url:'https://www.google.nl/#q='+this.fields[0][0].value+'&nfpr=1'});
-					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						links.push({text:'Wikipedia',url:'https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search='+this.fields[this.fields.length - 1][0].value});
-					if (this.fields.length > 1 && this.fields[this.fields.length - 1][0].id === 'wikipedia')
-						links.push({text:'Google Maps',url:'https://www.google.com/maps?oi=map&q='+this.fields[0][0].value});
+					if (this.fields[1][0].id === 'wikipedia')
+						links.push({text:'Wikipedia',url:'https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search='+this.fields[1][0].value});
+					if (this.google_maps && this.google_maps.length > 0)
+						links.push({text:'Google Maps',url:'https://www.google.com/maps?oi=map&q='+this.google_maps});
 					return $.json2html(links,templates.link);
 				}}
 		    ]}
 		]}
 	],
-	main_field_title: [{'<>':'h3','html':'${main_field}'}],
+	main_img: [{'<>':'img','class':'advies logo','src':'afbeeldingen/${img}'}],
+	wiki_img: [{'<>':'img','class':'bullet-logo','data-pin-nopin':'true','style':'right: 0px; position: relative;','src':'afbeeldingen/wikipedia.png'}],
+	wiki_value: [{'<>':'p','html':'${value}'}],
+	main_field_title: [{'<>':'h3','class':'main-field-title','html':'${main_field}'}],
 	other: [
 		{'<>':'div','class':'panel panel-default','html':[
 		    {'<>':'div','class':'row','html':[
@@ -187,6 +185,12 @@ Transcriptor = {
 				$("#"+target+" .panel-body").html('<span class="loading"></span>');
 				Transcriptor.sendCORSRequest('php/instructions.php?key='+key, 'GET', Transcriptor.addInstructions, target);
 			}
+		});
+		
+		$.getJSON( "config/tooltips.json", function( data ) {
+			Transcriptor.tooltips = data;
+			Transcriptor.debug("tooltips loaded:");
+			Transcriptor.debug(Transcriptor.tooltips);
 		});
 
 		Transcriptor.sendCORSRequest('php/about.php', 'GET', Transcriptor.addAbout, null);
