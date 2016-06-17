@@ -300,13 +300,13 @@ Transcriptor = {
 	},
 	
 	performExtendedSearch : function(name, type, from, to) {
-		$("#output .panel").html('<span class="loading">Aan het werk... (Vereist 2 tot 3 minuten...)</span>');
+		$("#output .panel").html('<span class="loading"> Aan het werk... (Vereist 2 tot 3 minuten...)</span>');
 		$("#output").removeClass("hidden");
 		Transcriptor.createProject(Transcriptor.generateProjectName(), name, type, from, to);
 	},
 	
 	performQuickSearch : function(name) {
-		$("#output .panel").html('<span class="loading"></span>');
+		$("#output .panel").html('<span class="loading"> Aan het werk...</span>');
 		$("#output").removeClass("hidden");
 		Transcriptor.sendClamRequest(Transcriptor.baseUrl+"actions/Transliterate/", {'x': name}, 'GET',  Transcriptor.displayOutput, null);
 	},
