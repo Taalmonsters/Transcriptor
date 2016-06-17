@@ -40,9 +40,8 @@ span.loading::before {
     content: url("../img/spinner.gif");
     margin-top: 4px;
 }
-span.loading::after {
+span.loading {
     font-style: italic;
-    content: '  Aan het werk... (Vereist 2 tot 3 minuten...)';
     vertical-align: text-bottom;
 }
 

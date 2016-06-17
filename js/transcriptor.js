@@ -167,7 +167,7 @@ Transcriptor = {
 				var from_lang = $( "#from-lang option:selected" ).val();
 				var to_lang = $( "#to-lang option:selected" ).val();
 				if (name != null && name.length > 0) {
-					$("#output .panel").html('<span class="loading"></span>');
+					$("#output .panel").html('<span class="loading">Aan het werk... (Vereist 2 tot 3 minuten...)</span>');
 					$("#output").removeClass("hidden");
 					Transcriptor.debug(name);
 					Transcriptor.performExtendedSearch(name, type, from_lang, to_lang);
@@ -300,7 +300,7 @@ Transcriptor = {
 	},
 	
 	performExtendedSearch : function(name, type, from, to) {
-		$("#output .panel").html('<span class="loading"></span>');
+		$("#output .panel").html('<span class="loading">Aan het werk... (Vereist 2 tot 3 minuten...)</span>');
 		$("#output").removeClass("hidden");
 		Transcriptor.createProject(Transcriptor.generateProjectName(), name, type, from, to);
 	},
