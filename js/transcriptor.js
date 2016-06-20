@@ -66,13 +66,8 @@ var templates = {
 	link: [{'<>':'a','href':'${url}','class':'main-block-link','target':'_blank','html':'${text}'}],
 	bullet: [{'<>':'img','class':'bullet-logo','src':'afbeeldingen/${bullet}'}],
 	content: [{'<>':'p','html':function() {
-		if (this.label) {
-			var c = this.label.length > 0 ? this.label+': '+this.value : this.value;
-			return (this.external_link && this.external_link.length > 0) ? c+$.json2html({url:this.external_link},templates.external_link).html : c;
-		} else if (this instanceof Array && this.length > 0 && this[0].label) {
-			var c = this[0].label.length > 0 ? this[0].label+': '+this[0].value : this[0].value;
-			return (this[0].external_link && this[0].external_link.length > 0) ? c+$.json2html({url:this[0].external_link},templates.external_link).html : c;
-		}
+    	var c = (this.label.length > 0) ? this.label+': '+this.value : this.value;
+    	return (this.external_link && this.external_link.length > 0) ? c+$.json2html({url:this.external_link},templates.external_link).html : c;
     }}]
 };
 
