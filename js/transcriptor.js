@@ -67,7 +67,7 @@ var templates = {
 	bullet: [{'<>':'img','class':'bullet-logo','src':'afbeeldingen/${bullet}'}],
 	content: [{'<>':'p','html':function() {
     	var c = (this.label.length > 0) ? this.label+': '+this.value : this.value;
-    	return (this.external_link && this.external_link.length > 0) ? c+$.json2html({url:this.external_link},templates.external_link).html : c;
+    	return (this.external_link && this.external_link.length > 0) ? c+' '+$.json2html({url:this.external_link},templates.external_link).html : c;
     }}]
 };
 
