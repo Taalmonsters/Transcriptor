@@ -108,7 +108,7 @@ Transcriptor = {
 	resetUrl: 'http://ticclops.uvt.nl/Transcriptor/',
 //	Tooltip cache
 	tooltips: [],
-	currentTab: 1,
+	currentTab: 2,
 	
 //	Set to true to turn on logging in JS console
 	doDebug: false,
