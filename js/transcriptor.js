@@ -92,17 +92,6 @@ $(document).on("mouseleave", 'div[data-tooltip-id]', function() {
 	$(this).tooltip('hide');
 });
 
-$(document).on('click', 'ul.nav > li > a', function (e) {
-	Transcriptor.currentTab = $(this).data('tab-id');
-	if (Transcriptor.currentTab == 1) {
-		$("#app div.extended-form").addClass("hidden");
-		$("#app div.simple-form").removeClass("hidden");
-	} else if (Transcriptor.currentTab == 2) {
-		$("#app div.simple-form").addClass("hidden");
-		$("#app div.extended-form").removeClass("hidden");
-	}
-});
-
 $(document).keypress(function(e) {
 	console.log("keypress");
 	if (e.which == 13)
