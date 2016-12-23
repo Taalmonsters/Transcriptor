@@ -109,6 +109,7 @@ Transcriptor = {
 //	Tooltip cache
 	tooltips: [],
 	currentTab: 2,
+	redirectUrl: 'http://www.taalmannetje.nl/transcriptor',
 	
 //	Set to true to turn on logging in JS console
 	doDebug: false,
@@ -186,6 +187,7 @@ Transcriptor = {
 		});
 
 		Transcriptor.loadAvailableLanguages();
+		Transcriptor.checkInput();
 	},
 	
 //	Transcriptor methods (CLAM communication and data display)
@@ -217,6 +219,25 @@ Transcriptor = {
 			}
             $("#logos > div").append("<a href='"+item.url+"' target='_blank'><img class='mini-logo "+cl+"' alt='"+item.text+"' src='" + item.img + "'></a>");
         });
+	},
+	
+	checkGetParameter: function(param) {
+	    var items = location.search.substr(1).split("&");
+	    for (var i = 0; i < items.length; i++) {
+	        var parts = items[i].split("=");
+	        if (parts[0] === param)
+	        	return decodeURIComponent(parts[1]);
+	    }
+	    return null;
+	},
+	
+	checkInput: function(){
+		$("#name").val(Transcriptor.checkGetParameter("q"));
+		var type = Transcriptor.checkGetParameter("t");
+		if (type) {
+			if (type === "other") type = "per";
+			$("#type").val(type);
+		}
 	},
 	
 	checkProjectStatus : function(data, params) {
@@ -298,6 +319,11 @@ Transcriptor = {
 		$("#output .panel").html('<span class="loading"> Aan het werk...</span>');
 		$("#output").removeClass("hidden");
 		Transcriptor.sendClamRequest(Transcriptor.baseUrl+"actions/Transliterate/", {'x': name}, 'GET',  Transcriptor.displayOutput, null);
+	},
+	
+	redirect: function(e) {
+		e.preventDefault();
+		window.location = Transcriptor.redirectUrl+"?q="+$("#name").val()+"&t="+$('input[name=type]:checked').val();
 	},
 	
 	retrieveProjectOutput : function(project) {
