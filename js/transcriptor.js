@@ -93,7 +93,6 @@ $(document).on("mouseleave", 'div[data-tooltip-id]', function() {
 });
 
 $(document).keypress(function(e) {
-	console.log("keypress");
 	if (e.which == 13)
 		$("#app .btn-submit").trigger("click");
 });
@@ -225,8 +224,9 @@ Transcriptor = {
 	    var items = location.search.substr(1).split("&");
 	    for (var i = 0; i < items.length; i++) {
 	        var parts = items[i].split("=");
-	        if (parts[0] === param)
+	        if (parts[0] === param) {
 	        	return decodeURIComponent(parts[1]);
+	        }
 	    }
 	    return null;
 	},
@@ -236,8 +236,9 @@ Transcriptor = {
 		var type = Transcriptor.checkGetParameter("t");
 		if (type) {
 			if (type === "other") type = "per";
-			$("#type").val(type);
-		}
+			$('input[name=type]').filter('[value='+type+']').prop('checked', true);
+		} else 
+			$('input[name=type]').filter('[value=per]').prop('checked', true);
 	},
 	
 	checkProjectStatus : function(data, params) {
